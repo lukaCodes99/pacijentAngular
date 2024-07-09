@@ -20,27 +20,27 @@ export class PatientService {
   ) { }
     
 
-  // getPatients(): Observable<Patient[]> {
-  //   return this.http.get<Patient[]>(`${this.pacijentiUrl}/all`)
-  //     .pipe(
-  //       tap(_ => console.log('fetched Patients')),
-  //       catchError(this.handleError<Patient[]>('getPatients', []))
-  //     );
-  // }
   getPatients(): Observable<Patient[]> {
-    const patients: Patient[] = [
-      { id: 1, firstName: 'John', lastName: 'Doe', phoneNumber: '1234567890' },
-      { id: 2, firstName: 'Jane', lastName: 'Doe', phoneNumber: '0987654321' },
-      { id: 3, firstName: 'Bob', lastName: 'Smith', phoneNumber: '1122334455' },
-      { id: 4, firstName: 'Alice', lastName: 'Johnson', phoneNumber: '5566778899' },
-      { id: 5, firstName: 'Charlie', lastName: 'Brown', phoneNumber: '2233445566' },
-      { id: 6, firstName: 'Eve', lastName: 'Green', phoneNumber: '9988776655' },
-    ];
-  
-    return of(patients).pipe(
-      tap(_ => console.log('fetched patients'))
-    );
+    return this.http.get<Patient[]>(`${this.pacijentiUrl}/all`)
+      .pipe(
+        tap(_ => console.log('fetched Patients')),
+        catchError(this.handleError<Patient[]>('getPatients', []))
+      );
   }
+  // getPatients(): Observable<Patient[]> {
+  //   const patients: Patient[] = [
+  //     { id: 1, firstName: 'John', lastName: 'Doe', phoneNumber: '1234567890' },
+  //     { id: 2, firstName: 'Jane', lastName: 'Doe', phoneNumber: '0987654321' },
+  //     { id: 3, firstName: 'Bob', lastName: 'Smith', phoneNumber: '1122334455' },
+  //     { id: 4, firstName: 'Alice', lastName: 'Johnson', phoneNumber: '5566778899' },
+  //     { id: 5, firstName: 'Charlie', lastName: 'Brown', phoneNumber: '2233445566' },
+  //     { id: 6, firstName: 'Eve', lastName: 'Green', phoneNumber: '9988776655' },
+  //   ];
+  
+  //   return of(patients).pipe(
+  //     tap(_ => console.log('fetched patients'))
+  //   );
+  // }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
