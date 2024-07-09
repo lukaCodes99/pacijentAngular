@@ -1,23 +1,26 @@
-<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
+<div class="table-container">
+  <mat-table [dataSource]="getDataSource()" class="mat-elevation-z8 styled-table">
     <!-- ID Column -->
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let treatment"> {{treatment.id}} </td>
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let treatment" class="cell">{{ treatment.id }}</td>
     </ng-container>
-  
+
     <!-- First Name Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Treatment Name </th>
-      <td mat-cell *matCellDef="let treatment"> {{treatment.name}} </td>
+      <th mat-header-cell *matHeaderCellDef>Treatment Name</th>
+      <td mat-cell *matCellDef="let treatment" class="cell">{{ treatment.name }}</td>
     </ng-container>
-  
+
     <!-- Last Name Column -->
     <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef> Treatment Price </th>
-      <td mat-cell *matCellDef="let treatment"> {{treatment.price}} </td>
+      <th mat-header-cell *matHeaderCellDef>Treatment Price</th>
+      <td mat-cell *matCellDef="let treatment" class="cell">{{ treatment.price }}</td>
     </ng-container>
-  
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </mat-table>
+</div>
+
+<button mat-raised-button (click)="openDialog()">Pick one</button>
