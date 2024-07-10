@@ -20,23 +20,26 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { PacijentComponent } from './pacijent/pacijent.component';
 import { PatientComponent } from './patient/patient.component';
 import { PatientsTreatmentsComponent } from './patients-treatments/patients-treatments.component';
 import { TreatmentDialogComponent } from './treatment-dialog/treatment-dialog.component';
 import { TreatmentComponent } from './treatment/treatment.component';
+import { PatientDialogComponent } from './patient-dialog/patient-dialog.component';
+import { EmployeeDialogComponent } from './employee-dialog/employee-dialog.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PacijentComponent,
     NavigationComponent,
     EmployeeComponent,
     PatientComponent,
     TreatmentComponent,
     PatientsTreatmentsComponent,
-    TreatmentDialogComponent
+    TreatmentDialogComponent,
+    PatientDialogComponent,
+    EmployeeDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +51,7 @@ import { TreatmentComponent } from './treatment/treatment.component';
     MatFormFieldModule,
     MatSlideToggleModule,
     MatTableModule,
+    MatSelectModule,
     HttpClientModule,
     MatSidenavModule,
     MatListModule,

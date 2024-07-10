@@ -4,7 +4,7 @@ import { EmployeeComponent } from './employee/employee.component';
 import { TreatmentComponent } from './treatment/treatment.component';
 import { PatientComponent } from './patient/patient.component';
 const routes: Routes = [
-  { path: 'pacijent', component: PatientComponent },
+  { path: 'pacijenti', component: PatientComponent },
   { path: 'administracija-korisnika', component: EmployeeComponent },
   { path: 'administracija-tretmana', component: TreatmentComponent },
   //{ path: '', redirectTo: '/pacijent', pathMatch: 'full'},

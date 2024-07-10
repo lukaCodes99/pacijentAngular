@@ -30,7 +30,9 @@ export class TreatmentComponent {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(TreatmentDialogComponent);
+    const dialogRef = this.dialog.open(TreatmentDialogComponent, {
+      width: '30%'    
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');

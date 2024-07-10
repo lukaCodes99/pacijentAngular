@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>Unesite novi podatak</h2>
+
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Ime zaposlenika</mat-label>
+    <input matInput [(ngModel)]="data.firstName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Prezime zaposlenika</mat-label>
+    <input matInput [(ngModel)]="data.lastName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Korisničko ime</mat-label>
+    <input matInput [(ngModel)]="data.username">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Lozinka</mat-label>
+    <input matInput [(ngModel)]="data.password">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Rola</mat-label>
+    <mat-select [(ngModel)]="data.role">
+      <mat-option *ngFor="let role of roles" [value]="role.value">
+        {{ role.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions class="custom-dialog-actions">
+  <button mat-button class="cancelButton" (click)="onNoClick()">Odustani</button>
+  <button mat-button class="saveButton" [mat-dialog-close]="data" cdkFocusInitial>Spremi</button>
+</mat-dialog-actions>
+
+
+
+

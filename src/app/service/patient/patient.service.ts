@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Pacijent } from '../../model/pacijent';
 import { Observable, catchError, of, tap } from 'rxjs';
 import { Patient } from '../../model/patient';
 

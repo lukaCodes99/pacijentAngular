@@ -63,3 +63,35 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .custom.mat-mdc-header-cell {
   color: blue;
 }
+
+.addButton {
+  margin: 20px 0 0 20px;
+  background-color: rgb(255, 182, 193)!important;
+}
+
+/* Directly targeting mat-form-field (if not using wrapper divs) */
+mat-form-field {
+  width: 100%; /* Ensures each field takes full width */
+}
+
+/* If using Flexbox on the container */
+mat-dialog-content {
+  
+  display: flex;
+  flex-direction: column; /* Stacks children vertically */
+}
+
+.custom-dialog-actions {
+  justify-content: space-between !important;
+  margin: 0 20px 20px 20px !important;
+}
+
+.cancelButton{
+  padding: 5px 18px !important;
+  background-color: rgba(255, 60, 60, 0.288) !important;
+}
+
+.saveButton{
+  padding: 5px 25px !important;
+  background-color: rgb(1, 214, 1) !important;
+}

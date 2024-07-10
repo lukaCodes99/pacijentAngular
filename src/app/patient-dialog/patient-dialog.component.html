@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Unesite novi podatak</h2>
+
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Ime pacijenta</mat-label>
+    <input matInput [(ngModel)]="data.firstName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Prezime pacijenta</mat-label>
+    <input matInput [(ngModel)]="data.lastName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Telefonski broj</mat-label>
+    <input matInput [(ngModel)]="data.phoneNumber">
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions class="custom-dialog-actions">
+  <button mat-button class="cancelButton" (click)="onNoClick()">Odustani</button>
+  <button mat-button class="saveButton" [mat-dialog-close]="data" cdkFocusInitial>Spremi</button>
+</mat-dialog-actions>
+
+
