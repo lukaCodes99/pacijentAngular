@@ -12,13 +12,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   width: 17%;
   background-color: rgb(255, 182, 193);
 }
-.mat-column-id,
+/* .mat-column-id,
 .mat-column-firstName,
 .mat-column-lastName,
 .mat-column-username,
 .mat-column-role {
   padding: 0 100px;
-}
+} */
 .table-container {
   display: flex;
   justify-content: center;
@@ -56,13 +56,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-column-firstName,
 .mat-column-lastName,
 .mat-column-username,
-.mat-column-role {
+.mat-column-role
+.mat-column-actions{
   flex: 1; /* Adjust the flex for even spacing */
 }
 
-.custom.mat-mdc-header-cell {
+
+/* .custom.mat-mdc-header-cell {
   color: blue;
-}
+} */
 
 .addButton {
   margin: 20px 0 0 20px;
@@ -94,4 +96,20 @@ mat-dialog-content {
 .saveButton{
   padding: 5px 25px !important;
   background-color: rgb(1, 214, 1) !important;
+}
+
+.editIcon {
+  color: rgb(64, 179, 218);
+}
+.editIcon:hover {
+  cursor: pointer;
+  color: rgb(0, 0, 255);
+}
+.deleteIcon {
+  margin-left: 10px;
+  color: rgba(255, 56, 56, 0.753);
+}
+.deleteIcon:hover {
+  cursor: pointer;
+  color: rgb(255, 0, 0);
 }

@@ -3,15 +3,17 @@
 <mat-dialog-content>
   <mat-form-field>
     <mat-label>Naziv tretmana</mat-label>
-    <input matInput [(ngModel)]="data.name">
+    <input matInput [(ngModel)]="data.name" required>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Cijena tretmana</mat-label>
-    <input type="number" matInput [(ngModel)]="data.price">
+    <input type="number" matInput [(ngModel)]="data.price" required>
   </mat-form-field>
 </mat-dialog-content>
 
 <mat-dialog-actions class="custom-dialog-actions">
   <button mat-button class="cancelButton" (click)="onNoClick()">Odustani</button>
-  <button mat-button class="saveButton" [mat-dialog-close]="data" cdkFocusInitial>Spremi</button>
+  <!-- Disable the save button if data.name or data.price is not filled -->
+  <button mat-button class="saveButton" [mat-dialog-close]="data" cdkFocusInitial 
+          [disabled]="!data.name || !data.price">Spremi</button>
 </mat-dialog-actions>

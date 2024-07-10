@@ -11,7 +11,7 @@ import { PatientDialogComponent } from '../patient-dialog/patient-dialog.compone
   styleUrl: './patient.component.css'
 })
 export class PatientComponent {
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'phoneNumber'];
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'phoneNumber', 'actions'];
   dataSource: BehaviorSubject<Patient[]> = new BehaviorSubject<Patient[]>([]);
 
   constructor(private patientService: PatientService, public dialog: MatDialog) { }

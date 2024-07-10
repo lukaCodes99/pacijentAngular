@@ -17,7 +17,8 @@
 
 <mat-dialog-actions class="custom-dialog-actions">
   <button mat-button class="cancelButton" (click)="onNoClick()">Odustani</button>
-  <button mat-button class="saveButton" [mat-dialog-close]="data" cdkFocusInitial>Spremi</button>
+  <button mat-button class="saveButton" [mat-dialog-close]="data" cdkFocusInitial
+          [disabled]="!data.firstName || !data.lastName || !data.phoneNumber">Spremi</button>
 </mat-dialog-actions>
 
 

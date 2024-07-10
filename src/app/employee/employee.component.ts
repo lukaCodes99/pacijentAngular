@@ -11,7 +11,7 @@ import { EmployeeDialogComponent } from '../employee-dialog/employee-dialog.comp
   styleUrl: './employee.component.css'
 })
 export class EmployeeComponent {
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'username', 'role'];
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'username', 'role', 'actions'];
   dataSource: BehaviorSubject<Employee[]> = new BehaviorSubject<Employee[]>([]);
 
   roles = [

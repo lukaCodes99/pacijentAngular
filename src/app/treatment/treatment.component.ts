@@ -13,7 +13,7 @@ import { TreatmentDialogComponent } from '../treatment-dialog/treatment-dialog.c
   styleUrl: './treatment.component.css',
 })
 export class TreatmentComponent {
-  displayedColumns: string[] = ['id', 'name', 'price'];
+  displayedColumns: string[] = ['id', 'name', 'price', 'actions'];
   dataSource: BehaviorSubject<Treatment[]> = new BehaviorSubject<Treatment[]>([]);
 
   constructor(private treatmentService: TreatmentService, public dialog: MatDialog) {}
@@ -39,7 +39,7 @@ export class TreatmentComponent {
       /*
       (assuming that clicking the confirm button returns a result, and canceling the dialog returns null or undefined)
       */
-      if (result !== null && result !== undefined) {
+      if (result !== null && result !== undefined && result !== '') {
         this.treatmentService.addTreatment(result).subscribe((newTreatment) => {
           console.log(`added treatment w/ id=${newTreatment.id}`); // Fixed template string syntax
           const prev = this.dataSource.getValue();
