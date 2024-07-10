@@ -4,6 +4,7 @@ import { EmployeeService } from '../service/employee/employee.service';
 import { BehaviorSubject } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { EmployeeDialogComponent } from '../employee-dialog/employee-dialog.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-employee',
@@ -30,10 +31,6 @@ export class EmployeeComponent {
     });
   }
 
-  // In your component.ts file
-
-
-
   getViewValueForRole(role: string): string {
     const foundRole = this.roles.find(r => r.value === role.toLowerCase());
     return foundRole ? foundRole.viewValue : 'Unknown Role';
@@ -41,6 +38,36 @@ export class EmployeeComponent {
 
   getDataSource() {
     return this.dataSource.asObservable();
+  }
+
+  deleteEmployee(employee: Employee): void {
+    this.employeeService.deleteEmployee(employee)
+      .subscribe(_ => {
+        const prev = this.dataSource.getValue();
+        const index = prev.findIndex(e => e.id === employee.id);
+        prev.splice(index, 1);
+        this.dataSource.next(prev);
+      });
+  }
+
+  openDeleteConfirmDialog(employee: Employee): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '250px',
+      data: { message: `Jeste li sigurni da želite izbrisati korisnika sa korisničim imenom ${employee.username}?`, confirmText: 'Izbriši', cancelText: 'Odustani' }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        this.employeeService.deleteEmployee(employee).subscribe(_ => {
+          const prev = this.dataSource.getValue();
+          const index = prev.findIndex(e => e.id === employee.id);
+          if (index > -1) {
+            prev.splice(index, 1);
+            this.dataSource.next(prev);
+          }
+        });
+      }
+    });
   }
 
   openDialog() {

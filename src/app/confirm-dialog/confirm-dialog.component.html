@@ -1,0 +1,6 @@
+<h2 mat-dialog-title>Potvrdi brisanje</h2>
+<mat-dialog-content>{{ data.message }}</mat-dialog-content>
+<mat-dialog-actions>
+  <button  mat-button (click)="onNoClick()">{{ data.cancelText || 'Ne' }}</button>
+  <button  mat-button color="primary" (click)="onYesClick()">{{ data.confirmText || 'Da' }}</button>
+</mat-dialog-actions>

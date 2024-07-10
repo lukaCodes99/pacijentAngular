@@ -27,6 +27,7 @@ import { TreatmentComponent } from './treatment/treatment.component';
 import { PatientDialogComponent } from './patient-dialog/patient-dialog.component';
 import { EmployeeDialogComponent } from './employee-dialog/employee-dialog.component';
 import { MatSelectModule } from '@angular/material/select';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { MatSelectModule } from '@angular/material/select';
     PatientsTreatmentsComponent,
     TreatmentDialogComponent,
     PatientDialogComponent,
-    EmployeeDialogComponent
+    EmployeeDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,

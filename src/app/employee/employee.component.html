@@ -35,10 +35,9 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let employee" class="cell">
-        <!-- <mat-icon aria-hidden="false" fontIcon="edit" (click)="editEmployee(employee)">edit</mat-icon>
-        <mat-icon aria-hidden="false" fontIcon="delete" (click)="deleteEmployee(employee)">delete</mat-icon> -->
+        <!-- <mat-icon aria-hidden="false" fontIcon="edit" (click)="editEmployee(employee)">edit</mat-icon> -->
         <mat-icon class="editIcon" aria-hidden="false" fontIcon="edit"></mat-icon>
-        <mat-icon class="deleteIcon" aria-hidden="false" fontIcon="delete"></mat-icon>
+        <mat-icon class="deleteIcon" aria-hidden="false" fontIcon="delete" (click)="openDeleteConfirmDialog(employee)"></mat-icon>
       </td>
     </ng-container>
 

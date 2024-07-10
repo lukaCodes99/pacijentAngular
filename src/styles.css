@@ -113,3 +113,7 @@ mat-dialog-content {
   cursor: pointer;
   color: rgb(255, 0, 0);
 }
+
+mat-dialog-actions button[mat-button] {
+  margin-left: 25px !important;
+}
