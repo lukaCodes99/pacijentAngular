@@ -15,6 +15,7 @@ export class EmployeeDialogComponent {
     {value: 'admin', viewValue: 'Administrator'},
     {value: 'head_nurse', viewValue: 'Glavna medicinska sestra'},
     {value: 'nurse', viewValue: 'Medicinska sestra'},
+    {value: 'doctor', viewValue: 'Doktor'},
   ];
 
   constructor(public dialogRef: MatDialogRef<EmployeeDialogComponent>) {}

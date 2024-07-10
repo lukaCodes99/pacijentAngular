@@ -35,11 +35,18 @@ export class TreatmentComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      const prev = this.dataSource.getValue();
-      result.id = prev.length + 1;
-      prev.push(result);
-      this.dataSource.next(prev);
+      // Check if result is not null or undefined
+      /*
+      (assuming that clicking the confirm button returns a result, and canceling the dialog returns null or undefined)
+      */
+      if (result !== null && result !== undefined) {
+        this.treatmentService.addTreatment(result).subscribe((newTreatment) => {
+          console.log(`added treatment w/ id=${newTreatment.id}`); // Fixed template string syntax
+          const prev = this.dataSource.getValue();
+          prev.push(newTreatment);
+          this.dataSource.next(prev);
+        });
+      }
     });
   }
 }

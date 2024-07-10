@@ -18,27 +18,37 @@ export class EmployeeService {
   ) { }
     
 
-  // getEmployees(): Observable<Employee[]> {
-  //   return this.http.get<Employee[]>(`${this.employeeUrl}/all`)
-  //     .pipe(
-  //       tap(_ => console.log('fetched employees')),
-  //       catchError(this.handleError<Employee[]>('getEmployees', []))
-  //     );
-  // }
   getEmployees(): Observable<Employee[]> {
-    const employees: Employee[] = [
-      { id: 1, firstName: 'John', lastName: 'Doe', username: 'jdoe', password: 'password1', role: 'Manager' },
-      { id: 2, firstName: 'Jane', lastName: 'Doe', username: 'jane', password: 'password2', role: 'Developer' },
-      { id: 3, firstName: 'Bob', lastName: 'Smith', username: 'bob', password: 'password3', role: 'Tester' },
-      { id: 4, firstName: 'Alice', lastName: 'Johnson', username: 'alice', password: 'password4', role: 'Developer' },
-      { id: 5, firstName: 'Charlie', lastName: 'Brown', username: 'charlie', password: 'password5', role: 'Manager' },
-      { id: 6, firstName: 'Eve', lastName: 'Green', username: 'eve', password: 'password6', role: 'Tester' },
-    ];
-  
-    return of(employees).pipe(
-      tap(_ => console.log('fetched employees'))
-    );
+    return this.http.get<Employee[]>(`${this.employeeUrl}/all`)
+      .pipe(
+        tap(_ => console.log('fetched employees')),
+        catchError(this.handleError<Employee[]>('getEmployees', []))
+      );
   }
+
+  addEmployee(employee: Employee): Observable<Employee>{
+    return this.http.post<Employee>(`${this.employeeUrl}/save`, employee, this.httpOptions)
+      .pipe(
+        tap((newEmployee: Employee) => console.log(`added employee w/ id=${newEmployee.id}`)),
+        catchError(this.handleError<Employee>('addEmployee'))
+      );
+  }
+
+
+  // getEmployees(): Observable<Employee[]> {
+  //   const employees: Employee[] = [
+  //     { id: 1, firstName: 'John', lastName: 'Doe', username: 'jdoe', password: 'password1', role: 'Manager' },
+  //     { id: 2, firstName: 'Jane', lastName: 'Doe', username: 'jane', password: 'password2', role: 'Developer' },
+  //     { id: 3, firstName: 'Bob', lastName: 'Smith', username: 'bob', password: 'password3', role: 'Tester' },
+  //     { id: 4, firstName: 'Alice', lastName: 'Johnson', username: 'alice', password: 'password4', role: 'Developer' },
+  //     { id: 5, firstName: 'Charlie', lastName: 'Brown', username: 'charlie', password: 'password5', role: 'Manager' },
+  //     { id: 6, firstName: 'Eve', lastName: 'Green', username: 'eve', password: 'password6', role: 'Tester' },
+  //   ];
+  
+  //   return of(employees).pipe(
+  //     tap(_ => console.log('fetched employees'))
+  //   );
+  // }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

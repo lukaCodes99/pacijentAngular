@@ -33,11 +33,14 @@ export class PatientComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      const prev = this.dataSource.getValue();
-      result.id = prev.length + 1;
-      prev.push(result);
-      this.dataSource.next(prev);
-    })
+      if(result !== null && result !== undefined) {
+        this.patientService.addPatient(result).subscribe((newPatient) => {
+          console.log(`added patient w/ id=${newPatient.id}`);
+          const prev = this.dataSource.getValue();
+          prev.push(newPatient);
+          this.dataSource.next(prev);
+        });
+      }
+    });
   }
 }

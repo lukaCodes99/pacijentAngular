@@ -26,6 +26,15 @@ export class PatientService {
         catchError(this.handleError<Patient[]>('getPatients', []))
       );
   }
+
+  addPatient(patient: Patient): Observable<Patient>{
+    return this.http.post<Patient>(`${this.pacijentiUrl}/save`, patient, this.httpOptions)
+      .pipe(
+        tap((newPatient: Patient) => console.log(`added patient w/ id=${newPatient.id}`)),
+        catchError(this.handleError<Patient>('addPatient'))
+      );
+  }
+
   // getPatients(): Observable<Patient[]> {
   //   const patients: Patient[] = [
   //     { id: 1, firstName: 'John', lastName: 'Doe', phoneNumber: '1234567890' },
