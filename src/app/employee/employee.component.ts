@@ -62,7 +62,7 @@ export class EmployeeComponent {
         this.employeeService.updateEmployee(result).subscribe((newEmployee) => {
           console.log(`updated employee w/ id=${newEmployee.id}`);
           const prev = this.dataSource.getValue();
-          prev.push(newEmployee);
+          //prev.push(newEmployee);
           this.dataSource.next(prev);
         });
       }

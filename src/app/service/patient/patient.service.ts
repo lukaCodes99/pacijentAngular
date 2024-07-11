@@ -7,6 +7,7 @@ import { Patient } from '../../model/patient';
   providedIn: 'root'
 })
 export class PatientService {
+  
 
   private patientUrl = 'http://localhost:8082/patient';
 
@@ -42,6 +43,14 @@ export class PatientService {
       tap(_ => console.log(`deleted patient id=${id}`)),
       catchError(this.handleError<Patient>('deletePatient'))
     );
+  }
+
+  updatePatient(patient: Patient): Observable<any> {
+    return this.http.put(`${this.patientUrl}/update`, patient, this.httpOptions)
+      .pipe(
+        tap(_ => console.log(`updated patient id=${patient.id}`)),
+        catchError(this.handleError<any>('updatePatient'))
+      );
   }
 
   // getPatients(): Observable<Patient[]> {

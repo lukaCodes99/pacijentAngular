@@ -30,7 +30,7 @@
       <td mat-cell *matCellDef="let patient" class="cell">
         <!-- <mat-icon aria-hidden="false" fontIcon="edit" (click)="editEmployee(employee)">edit</mat-icon>
         <mat-icon aria-hidden="false" fontIcon="delete" (click)="deleteEmployee(employee)">delete</mat-icon> -->
-        <mat-icon class="editIcon" aria-hidden="false" fontIcon="edit"></mat-icon>
+        <mat-icon class="editIcon" aria-hidden="false" fontIcon="edit" (click)="openEditingDialog(patient)"></mat-icon>
         <mat-icon class="deleteIcon" aria-hidden="false" fontIcon="delete" (click)="openDeleteConfirmDialog(patient)"></mat-icon>
       </td>
     </ng-container>

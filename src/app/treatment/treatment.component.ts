@@ -65,7 +65,7 @@ export class TreatmentComponent {
         this.treatmentService.updateTreatment(result).subscribe((newTreatment) => {
           console.log(`updated treatment w/ id=${newTreatment.id}`); // Fixed template string syntax
           const prev = this.dataSource.getValue();
-          prev.push(newTreatment);
+          //prev.push(newTreatment);
           this.dataSource.next(prev);
         });
       }
@@ -93,5 +93,5 @@ export class TreatmentComponent {
     });
   }
 
-  
+
 }

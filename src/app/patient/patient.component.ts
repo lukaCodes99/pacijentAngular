@@ -48,6 +48,28 @@ export class PatientComponent {
     });
   }
 
+  openEditingDialog(patient: Patient) {
+    const dialogRef = this.dialog.open(PatientDialogComponent, {
+      width: '30%'
+    });
+    dialogRef.componentInstance.data = patient;
+
+    dialogRef.afterClosed().subscribe((result) => {
+      // Check if result is not null or undefined
+      /*
+      (assuming that clicking the confirm button returns a result, and canceling the dialog returns null or undefined)
+      */
+      if (result !== null && result !== undefined && result !== '') {
+        this.patientService.updatePatient(result).subscribe((newPatient) => {
+          console.log(`updated patient w/ id=${newPatient.id}`); // Fixed template string syntax
+          const prev = this.dataSource.getValue();
+          //prev.push(newPatient);
+          this.dataSource.next(prev);
+        });
+      }
+    });
+  }
+
   openDialog() {
     const dialogRef = this.dialog.open(PatientDialogComponent, {
       width: '30%'    
