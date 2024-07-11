@@ -8,7 +8,7 @@ import { Patient } from '../../model/patient';
 })
 export class PatientService {
 
-  private pacijentiUrl = 'http://localhost:8082/patient';
+  private patientUrl = 'http://localhost:8082/patient';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -20,7 +20,7 @@ export class PatientService {
     
 
   getPatients(): Observable<Patient[]> {
-    return this.http.get<Patient[]>(`${this.pacijentiUrl}/all`)
+    return this.http.get<Patient[]>(`${this.patientUrl}/all`)
       .pipe(
         tap(_ => console.log('fetched Patients')),
         catchError(this.handleError<Patient[]>('getPatients', []))
@@ -28,11 +28,20 @@ export class PatientService {
   }
 
   addPatient(patient: Patient): Observable<Patient>{
-    return this.http.post<Patient>(`${this.pacijentiUrl}/save`, patient, this.httpOptions)
+    return this.http.post<Patient>(`${this.patientUrl}/save`, patient, this.httpOptions)
       .pipe(
         tap((newPatient: Patient) => console.log(`added patient w/ id=${newPatient.id}`)),
         catchError(this.handleError<Patient>('addPatient'))
       );
+  }
+
+  deletePatient(patient: Patient){
+    const id = patient.id;
+    const url = `${this.patientUrl}/delete/${id}`;
+    return this.http.delete<Patient>(url, this.httpOptions).pipe(
+      tap(_ => console.log(`deleted patient id=${id}`)),
+      catchError(this.handleError<Patient>('deletePatient'))
+    );
   }
 
   // getPatients(): Observable<Patient[]> {

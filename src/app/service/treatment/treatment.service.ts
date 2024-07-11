@@ -33,22 +33,24 @@ export class TreatmentService {
         catchError(this.handleError<Treatment>('addTreatment'))
       );
   }
-  // getTreatments(): Observable<Treatment[]> {
-  //   const treatments: Treatment[] = [
-  //     { id: 1, name: 'Treatment 1', price: 100 },
-  //     { id: 2, name: 'Treatment 2', price: 200 },
-  //     { id: 3, name: 'Treatment 3', price: 300 },
-  //     { id: 4, name: 'Treatment 4', price: 400 },
-  //     { id: 5, name: 'Treatment 5', price: 500 },
-  //     { id: 6, name: 'Treatment 6', price: 600 },
-  //   ];
+
+  deleteTreatment(treatment: Treatment){
+    const id = treatment.id;
+    const url = `${this.treatmentUrl}/delete/${id}`;
+    return this.http.delete<Treatment>(url, this.httpOptions).pipe(
+      tap(_ => console.log(`deleted treatment id=${id}`)),
+      catchError(this.handleError<Treatment>('deleteTreatment'))
+    );
+  }
+
+  updateTreatment(treatment: Treatment): Observable<any> {
+    return this.http.put(`${this.treatmentUrl}/update`, treatment, this.httpOptions)
+      .pipe(
+        tap(_ => console.log(`updated treatment id=${treatment.id}`)),
+        catchError(this.handleError<any>('updateTreatment'))
+      );
+  }
   
-  //   return of(treatments).pipe(
-  //     tap(_ => console.log('fetched treatments'))
-  //   );
-  // }
-
-
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
     console.error(operation);

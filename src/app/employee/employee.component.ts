@@ -50,6 +50,26 @@ export class EmployeeComponent {
       });
   }
 
+  openEditingDialog(employee: Employee){
+    const dialogRef = this.dialog.open(EmployeeDialogComponent, {
+      width: '30%'
+    });
+    dialogRef.componentInstance.data = employee;
+
+    dialogRef.afterClosed().subscribe((result) => {
+      
+      if(result !== null && result !== undefined) {
+        this.employeeService.updateEmployee(result).subscribe((newEmployee) => {
+          console.log(`updated employee w/ id=${newEmployee.id}`);
+          const prev = this.dataSource.getValue();
+          prev.push(newEmployee);
+          this.dataSource.next(prev);
+        });
+      }
+      
+    })
+  }
+
   openDeleteConfirmDialog(employee: Employee): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '250px',

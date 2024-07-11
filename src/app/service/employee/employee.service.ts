@@ -43,6 +43,14 @@ export class EmployeeService {
     );
   }
 
+  updateEmployee(employee: Employee): Observable<any> {
+    return this.http.put(`${this.employeeUrl}/update`, employee, this.httpOptions)
+      .pipe(
+        tap(_ => console.log(`updated employee id=${employee.id}`)),
+        catchError(this.handleError<any>('updateEmployee'))
+      );
+  }
+
 
   // getEmployees(): Observable<Employee[]> {
   //   const employees: Employee[] = [
