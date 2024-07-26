@@ -1,0 +1,18 @@
+<mat-dialog-content>
+    
+    <mat-form-field>
+      <mat-label>Korisničko ime</mat-label>
+      <input matInput [(ngModel)]="data.username">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Lozinka</mat-label>
+      <input type="password" matInput [(ngModel)]="data.password">
+    </mat-form-field>
+    
+  </mat-dialog-content>
+  
+  <mat-dialog-actions class="custom-dialog-actions">
+    <button mat-button class="cancelButton" (click)="onNoClick()">Odustani</button>
+    <button mat-button class="saveButton" [mat-dialog-close]="data" cdkFocusInitial
+            [disabled]="!data.username || !data.password">Spremi</button>
+  </mat-dialog-actions>

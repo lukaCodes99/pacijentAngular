@@ -1,5 +1,5 @@
 <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #sidenav mode="side" opened="true" class="sidenav">
+    <mat-sidenav #sidenav mode="side" opened="true" class="sidenav" *ngIf="!isLoginRoute()">
       <app-navigation></app-navigation>
     </mat-sidenav>
   

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,4 +13,11 @@ export class AppComponent {
   onToggleChange(event: MatSlideToggleChange) {
     console.log(event.checked); // This will log true if the toggle is checked, false otherwise
   }
+
+  constructor(private router: Router) {}
+
+  isLoginRoute(): boolean {
+    return this.router.url === '/login';
+  }
+
 }
