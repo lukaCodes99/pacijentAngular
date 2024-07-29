@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
+import { AuthService } from '../service/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +11,11 @@ import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 })
 export class LoginComponent {
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog, 
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.openDialog();
@@ -23,8 +29,12 @@ export class LoginComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // Handle the dialog result here
-      console.log('Dialog closed with result:', result);
+      if (result) {
+        this.authService.login(result).subscribe(_ => {
+          this.router.navigate(['/administracija-tretmana']);
+          console.log('Login successful');
+        });
+    };
     });
   }
 

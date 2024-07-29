@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Login } from '../model/login';
+import {  LoginRequest } from '../model/loginRequest';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -9,7 +9,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class LoginDialogComponent {
 
-  public data: Login = {};
+  public data: LoginRequest = {};
 
   constructor(public dialogRef: MatDialogRef<LoginDialogComponent>) {}
 
