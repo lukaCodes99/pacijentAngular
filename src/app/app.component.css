@@ -1,13 +1,34 @@
 /* navigation.component.css */
 
 .sidenav-container {
-    height: 100%;
-  }
-  
-  .sidenav {
-    width: 17%;
-    background-color: rgb(255, 182, 193);
-  }
-  
+  height: 100%;
+}
+
+.sidenav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 17%;
+  background-color: rgb(255, 182, 193);
+}
+
+.sidenav-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.logoutButton {
+  overflow: hidden;
+  margin: auto auto 10px auto; /* Adds margin to the top and bottom, centers horizontally */
+  width: 60%; /* Sets the width to 60% of the container */
+  padding: 5px 25px !important;
+  background-color: rgb(216, 56, 83) !important;
+}
+
+.logoutButton:hover {
+  cursor: pointer;
+  background-color: rgb(255, 0, 0) !important;
+}
 
   

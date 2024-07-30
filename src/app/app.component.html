@@ -1,11 +1,13 @@
 <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #sidenav mode="side" opened="true" class="sidenav" *ngIf="!isLoginRoute()">
+  <mat-sidenav #sidenav mode="side" opened="true" class="sidenav" *ngIf="!isLoginRoute()">
+    <div class="sidenav-content">
       <app-navigation></app-navigation>
-    </mat-sidenav>
+      <button class="logoutButton" mat-button (click)="logout()" [attr.disabled]="isButtonDisabled ? true : null">Odjava</button>
+    </div>
+  </mat-sidenav>
   
-    <mat-sidenav-content>
-      <!-- The content of your page goes here -->
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
+  <mat-sidenav-content>
+    <!-- The content of your page goes here -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
 </mat-sidenav-container>
-  

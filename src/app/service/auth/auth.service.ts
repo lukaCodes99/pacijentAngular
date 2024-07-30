@@ -8,7 +8,7 @@ import { Observable, of, tap } from 'rxjs';
 export class AuthService {
 
 private loginUrl = 'http://localhost:8082/auth/login';
-private logoutUrl = 'https://localhost:8082/logout';
+private logoutUrl = 'http://localhost:8082/auth/logout';
 private refreshTokenUrl = 'https://localhost:8082/auth/refreshToken';
 
 constructor(private http: HttpClient) { }
@@ -34,7 +34,29 @@ login(credentials: {username: string, password: string}): Observable<any> {
         }
       })
     );
-  }	  
+  }	
+  
+  logout(): Observable<any> {
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (!refreshToken) {
+      console.error('No refresh token found');
+      return of(null); // Return an observable with null value to avoid further processing
+    }
+    console.log('Logout called1');
+    const urlWithParams = `${this.logoutUrl}?token=${refreshToken}`;
+    return this.http.post<any>(urlWithParams, {}, this.httpOptions).pipe(
+      tap(response => {
+        console.log('Logout called2');
+        if (response && response.message === "User logged out successfully") {
+          console.log('Logout called3');
+          localStorage.removeItem('token');
+          localStorage.removeItem('refreshToken');
+        } else {
+          console.error('Logout failed');
+        }
+      })
+    );
+  }
 
   refreshToken(): Observable<any> {
     const refreshToken = localStorage.getItem('refreshToken');
