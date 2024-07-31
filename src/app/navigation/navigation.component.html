@@ -1,8 +1,8 @@
-<h3>Trenutni korisnik</h3>
+<h3 style="font-weight: bold;">Pozdrav, {{ username }}!</h3>
 <ul class="navigation-links">
     <li><a routerLink="/pacijenti">Pacijenti</a></li>
     <!-- <li><a routerLink="/treatment">Tretmani</a></li> -->
-    <li><a routerLink="/administracija-korisnika">Administracija korisnika</a></li>
-    <li><a routerLink="/administracija-tretmana">Administracija tretmana</a></li>
+    <li *ngIf="showUsers()"><a routerLink="/administracija-korisnika">Administracija korisnika</a></li>
+    <li *ngIf="showTreatments()"><a routerLink="/administracija-tretmana">Administracija tretmana</a></li>
 </ul>
   

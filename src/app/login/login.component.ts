@@ -31,7 +31,7 @@ export class LoginComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.authService.login(result).subscribe(_ => {
-          this.router.navigate(['/administracija-tretmana']);
+          this.router.navigate(['/pacijenti']);
           console.log('Login successful');
         });
     };

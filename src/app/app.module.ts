@@ -31,6 +31,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { LoginComponent } from './login/login.component';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { AuthInterceptor } from './utils/AuthInterceptor';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { AuthInterceptor } from './utils/AuthInterceptor';
     EmployeeDialogComponent,
     ConfirmDialogComponent,
     LoginComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,
