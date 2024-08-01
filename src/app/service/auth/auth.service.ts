@@ -8,50 +8,62 @@ import { Observable, of, tap } from 'rxjs';
 })
 export class AuthService {
 
-private loginUrl = 'http://localhost:8082/auth/login';
-private logoutUrl = 'http://localhost:8082/auth/logout';
-private refreshTokenUrl = 'http://localhost:8082/auth/refreshToken';
+  private loginUrl = 'http://localhost:8082/auth/login';
+  private logoutUrl = 'http://localhost:8082/auth/logout';
+  private refreshTokenUrl = 'http://localhost:8082/auth/refreshToken';
+  private decodedToken: any;
 
-constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.decodeToken();
+  }
 
-httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
-login(credentials: {username: string, password: string}): Observable<any> {
-  return this.http.post<any>(this.loginUrl, credentials, this.httpOptions).pipe(
-    
+  private decodeToken(): void {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        this.decodedToken = jwtDecode(token);
+        console.log('Decoded token', this.decodedToken);
+      } catch (error) {
+        console.error('Invalid token', error);
+        this.decodedToken = null;
+      }
+    } else {
+      console.error('No token found');
+      this.decodedToken = null;
+    }
+  }
+
+  login(credentials: {username: string, password: string}): Observable<any> {
+    return this.http.post<any>(this.loginUrl, credentials, this.httpOptions).pipe(
       tap(response => {
-        console.log('Login successful')
         if (response) {
-          console.log('Login successful22222'),
           localStorage.setItem('token', response.accessToken);
           localStorage.setItem('refreshToken', response.refreshToken);
-          console.log("Access token", response.accessToken);
-          console.log("Refresh token", response.refreshToken);
-          
+          this.decodeToken(); // Decode the new token
         } else {
           console.error('Token not found in response');
         }
       })
     );
-  }	
-  
+  }
+
   logout(): Observable<any> {
     const refreshToken = localStorage.getItem('refreshToken');
     if (!refreshToken) {
       console.error('No refresh token found');
-      return of(null); // Return an observable with null value to avoid further processing
+      return of(null);
     }
-    console.log('Logout called1');
     const urlWithParams = `${this.logoutUrl}?token=${refreshToken}`;
     return this.http.post<any>(urlWithParams, {}, this.httpOptions).pipe(
       tap(response => {
-        console.log('Logout called2');
         if (response && response.message === "User logged out successfully") {
-          console.log('Logout called3');
           localStorage.removeItem('token');
           localStorage.removeItem('refreshToken');
+          this.decodedToken = null; // Clear the decoded token
         } else {
           console.error('Logout failed');
         }
@@ -59,68 +71,31 @@ login(credentials: {username: string, password: string}): Observable<any> {
     );
   }
 
-
   getCurrentUser(): Observable<any> {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      console.error('No token found');
-      return of(null); // Return an observable with null value to avoid further processing
-    }
-    try {
-      const decodedToken = jwtDecode(token);
-      console.log('Decoded token', decodedToken);
-      console.log('Decoded token sub', decodedToken.sub);
-      return of(decodedToken.sub); // Return the decoded token as an observable
-    } catch (error) {
-      console.error('Invalid token', error);
-      return of(null); // Return an observable with null value if token is invalid
+    if (this.decodedToken) {
+      return of(this.decodedToken.sub);
+    } else {
+      return of(null);
     }
   }
 
   isRoleAdmin(): boolean {
-    const token = localStorage.getItem('token');
-    console.log('Token11', token);
-    if(token){
-      console.log('Token22', token);
-      const decoded: any = jwtDecode(token);
-      console.log('Decoded', decoded);
-  
-      // Check if 'roles' is an array
-      console.log('Is roles an array?', Array.isArray(decoded.roles));
-      console.log('Roles array:', decoded.roles);
-  
-      // Check if 'admin' exists in the roles array
-      const hasAdminRole = decoded.roles.includes('admin');
-      
-      return hasAdminRole;
-    }
-    else return false;
+    return this.decodedToken ? this.decodedToken.roles.includes('admin') : false;
   }
-  
 
   isRoleHeadNurse(): boolean {
-    const token = localStorage.getItem('token');
-    if(token){
-      const decoded: any = jwtDecode(token);
-      return decoded.roles.includes('head_nurse');
-    }
-    else return false;
+    return this.decodedToken ? this.decodedToken.roles.includes('head_nurse') : false;
   }
 
   isRoleNurse(): boolean {
-    const token = localStorage.getItem('token');
-    if(token){
-      const decoded: any = jwtDecode(token);
-      return decoded.roles.includes('nurse');
-    }
-    else return false;
+    return this.decodedToken ? this.decodedToken.roles.includes('nurse') : false;
   }
-
 
   refreshToken(): Observable<any> {
     const refreshToken = localStorage.getItem('refreshToken');
     if (!refreshToken) {
       console.error('No refresh token found');
+      return of(null);
     }
     const body = { refreshToken: refreshToken, expiredAccessToken: localStorage.getItem('token') };
     return this.http.post<any>(`${this.refreshTokenUrl}`, body).pipe(
@@ -128,17 +103,17 @@ login(credentials: {username: string, password: string}): Observable<any> {
         if (response && response.tokens) {
           localStorage.setItem('token', response.tokens.accessToken);
           localStorage.setItem('refreshToken', response.tokens.refreshToken);
+          this.decodeToken(); // Decode the new token
         }
       })
     );
   }
 
-
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-    console.error(operation);
-    console.error(error);
-    return of(result as T);
+      console.error(operation);
+      console.error(error);
+      return of(result as T);
     };
   }
 }

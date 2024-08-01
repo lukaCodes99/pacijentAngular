@@ -5,6 +5,8 @@ import { BehaviorSubject } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { PatientDialogComponent } from '../patient-dialog/patient-dialog.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-patient',
@@ -15,7 +17,11 @@ export class PatientComponent {
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'phoneNumber', 'actions'];
   dataSource: BehaviorSubject<Patient[]> = new BehaviorSubject<Patient[]>([]);
 
-  constructor(private patientService: PatientService, public dialog: MatDialog) { }
+  constructor(
+    private patientService: PatientService, 
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
     console.log('ngOnInit');
@@ -35,18 +41,32 @@ export class PatientComponent {
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      if(result) {
-        this.patientService.deletePatient(patient).subscribe(_ => {
-          const prev = this.dataSource.getValue();
-          const index = prev.findIndex(e => e.id === patient.id);
-          if (index > -1) {
-            prev.splice(index, 1);
-            this.dataSource.next(prev);
+      if (result) {
+        this.patientService.deletePatient(patient).subscribe({
+          next: (response: any) => {
+            if (response.status === 204) {
+              // Patient successfully deleted, update the dataSource
+              const prev = this.dataSource.getValue();
+              const index = prev.findIndex(e => e.id === patient.id);
+              if (index > -1) {
+                prev.splice(index, 1);
+                this.dataSource.next(prev);
+              }
+            } else {
+              this.snackBar.open('Nemate prava za izvršenje ove akcije', 'Close', {
+                duration: 5000,
+              });
+            }
+          },
+          error: err => {
+            this.snackBar.open('Nemate prava za izvršenje ove akcije', 'Close', {
+              duration: 5000,
+            });
           }
         });
       }
     });
-  }
+  }    
 
   openEditingDialog(patient: Patient) {
     const dialogRef = this.dialog.open(PatientDialogComponent, {

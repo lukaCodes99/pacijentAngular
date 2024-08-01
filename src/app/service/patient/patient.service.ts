@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, of, tap } from 'rxjs';
+import { Observable, catchError, of, tap, throwError } from 'rxjs';
 import { Patient } from '../../model/patient';
 
 @Injectable({
@@ -36,14 +36,17 @@ export class PatientService {
       );
   }
 
-  deletePatient(patient: Patient){
+  deletePatient(patient: Patient) {
     const id = patient.id;
     const url = `${this.patientUrl}/delete/${id}`;
-    return this.http.delete<Patient>(url, this.httpOptions).pipe(
-      tap(_ => console.log(`deleted patient id=${id}`)),
-      catchError(this.handleError<Patient>('deletePatient'))
+    return this.http.delete(url, { observe: 'response' }).pipe(
+      tap(response => console.log(`Deleted patient id=${id}, status=${response.status}`)),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => new Error(`Delete patient failed with status ${error.status}`));
+      })
     );
   }
+  
 
   updatePatient(patient: Patient): Observable<any> {
     return this.http.put(`${this.patientUrl}/update`, patient, this.httpOptions)
