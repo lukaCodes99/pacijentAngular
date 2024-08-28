@@ -32,6 +32,7 @@
         <mat-icon aria-hidden="false" fontIcon="delete" (click)="deleteEmployee(employee)">delete</mat-icon> -->
         <mat-icon class="editIcon" aria-hidden="false" fontIcon="edit" (click)="openEditingDialog(patient)"></mat-icon>
         <mat-icon class="deleteIcon" aria-hidden="false" fontIcon="delete" (click)="openDeleteConfirmDialog(patient)"></mat-icon>
+        <mat-icon class="emailIcon" fontIcon="email" (click)="openGmail(patient.phoneNumber)"></mat-icon>
       </td>
     </ng-container>
 

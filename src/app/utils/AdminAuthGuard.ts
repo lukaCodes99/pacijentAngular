@@ -19,7 +19,6 @@ export class AdminAuthGuard implements CanActivate {
             map((user: any) => {
                 if (user) {
                     const isUserAdmin = this.authService.isRoleAdmin();
-                    console.log(isUserAdmin + ' isUserAdmin');
                     if (isUserAdmin) {
                         return true;
                     } else {

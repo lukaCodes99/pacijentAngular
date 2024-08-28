@@ -37,7 +37,8 @@ export class PatientComponent {
   openDeleteConfirmDialog(patient: Patient): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '250px',
-      data: { message: `Jeste li sigurni da želite izbrisati pacijenta ${patient.firstName} ${patient.lastName}?`, confirmText: 'Izbriši', cancelText: 'Odustani' }
+      data: { message: `Jeste li sigurni da želite izbrisati pacijenta ${patient.firstName} ${patient.lastName}?`, 
+              confirmText: 'Izbriši', cancelText: 'Odustani' }
     });
   
     dialogRef.afterClosed().subscribe(result => {
@@ -106,4 +107,11 @@ export class PatientComponent {
       }
     });
   }
+
+  openGmail(phoneNumber: string): void {
+    phoneNumber = 'valerijakelenic8@gmail.com';
+    const mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${phoneNumber}`;
+    window.open(mailtoLink, '_blank');
+  }
+
 }

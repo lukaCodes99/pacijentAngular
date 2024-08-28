@@ -8,10 +8,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   height: 100%;
 }
 
-.sidenav {
+/* .sidenav {
   width: 17%;
   background-color: rgb(255, 182, 193);
-}
+} */
 /* .mat-column-id,
 .mat-column-firstName,
 .mat-column-lastName,
@@ -29,7 +29,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .styled-table {
   margin: 20px 0;
   border: 1px solid rgb(209, 147, 156) !important; /* Add border to the table */
-  border-radius: 15px; /* Add border radius to the table */
+  border-radius: 10px; /* Add border radius to the table */
   overflow: hidden; /* Ensure border radius is applied */
   background-color: white; /* Ensure the background color is white */
   padding: 1rem;
@@ -85,7 +85,7 @@ mat-dialog-content {
 
 .custom-dialog-actions {
   justify-content: space-between !important;
-  margin: 0 20px 20px 20px !important;
+  margin: 0 20px 20px 0px !important;
 }
 
 .cancelButton{
@@ -104,6 +104,9 @@ mat-dialog-content {
 .editIcon:hover {
   cursor: pointer;
   color: rgb(0, 0, 255);
+  padding: 7px !important;
+  border-radius: 100%;
+  background-color: rgb(109, 189, 255);
 }
 .deleteIcon {
   margin-left: 10px;
@@ -112,8 +115,35 @@ mat-dialog-content {
 .deleteIcon:hover {
   cursor: pointer;
   color: rgb(255, 0, 0);
+  padding: 7px !important;
+  border-radius: 100%;
+  background-color: rgb(109, 189, 255);
 }
+
+.emailIcon {
+  margin-left: 25px;
+  color: rgb(185, 47, 47);
+}
+.emailIcon:hover {
+  cursor: pointer;
+  color: rgb(85, 22, 22);
+  padding: 7px !important;
+  border-radius: 100%;
+  background-color: rgb(109, 189, 255);
+}
+
 
 mat-dialog-actions button[mat-button] {
   margin-left: 25px !important;
+}
+
+.logoutButton {
+  right: 0;
+  padding: 5px 25px !important;
+  background-color: rgb(216, 56, 83)!important;
+}
+
+.logoutButton:hover {
+  cursor: pointer;
+  background-color: rgb(255, 0, 0)!important;
 }

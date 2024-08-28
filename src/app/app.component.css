@@ -12,6 +12,18 @@
   background-color: rgb(255, 182, 193);
 }
 
+/*
+255, 105, 180
+173, 216, 230
+127, 255, 212
+230, 230, 250
+200, 162, 200
+245, 245, 220
+247, 231, 206
+255, 192, 203
+255, 127, 80
+*/
+
 .sidenav-content {
   display: flex;
   flex-direction: column;
@@ -19,6 +31,7 @@
 }
 
 .logoutButton {
+  color: white !important;
   overflow: hidden;
   margin: auto auto 10px auto; /* Adds margin to the top and bottom, centers horizontally */
   width: 60%; /* Sets the width to 60% of the container */
